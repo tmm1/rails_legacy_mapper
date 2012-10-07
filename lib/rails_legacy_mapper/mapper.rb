@@ -76,7 +76,7 @@ module RailsLegacyMapper
         path = path.gsub('.:format', '(.:format)')
         path = optionalize_trailing_dynamic_segments(path, requirements, defaults)
         glob = $1.to_sym if path =~ /\/\*(\w+)$/
-        path = ::Rack::Mount::Utils.normalize_path(path)
+        path = ::ActionDispatch::Routing::Mapper.normalize_path(path)
 
         if glob && !defaults[glob].blank?
           raise ActionController::RoutingError, "paths cannot have non-empty default values"
